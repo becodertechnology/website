@@ -745,6 +745,39 @@ https://templatemo.com/tm-568-digimedia
   <script src="assets/js/animation.js"></script>
   <script src="assets/js/imagesloaded.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script type="text/javascript" 
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+      (function() {
+          emailjs.init("i_zUCQltxbOuZFS6T"); // Replace with your EmailJS user ID
+      })();
+
+      document.getElementById('contact').addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          var name = document.getElementById('name').value;
+          var email = document.getElementById('email').value;
+          var subject = document.getElementById('subject').value;
+          var message = document.getElementById('message').value;
+
+          const templateParams = {
+              from_name: name,
+              from_email: email,
+              subject: subject,
+              message: message,
+          };
+
+          emailjs.send('service_kkqc8yf', 'template_x0ntztv', templateParams)
+              .then(function(response) {
+                  console.log('SUCCESS!', response.status, response.text);
+                  alert('Email sent successfully!');
+              }, function(error) {
+                  console.log('FAILED...', error);
+                  alert('Failed to send email: ' + JSON.stringify(error));
+              });
+      });
+  </script>
 
 </body>
 
